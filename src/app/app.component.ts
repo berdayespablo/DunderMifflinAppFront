@@ -12,7 +12,7 @@ export class AppComponent implements OnInit{
   public employees: Employee[];
 
   constructor(private employeeService: EmployeeService){ }
-  
+
   ngOnInit(): void {
     this.getEmployees();
   }
@@ -27,4 +27,27 @@ export class AppComponent implements OnInit{
       }
     );
   }
+
+  public onOpenModal(employee: Employee, mode: String): void{
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none'; 
+    button.setAttribute('data-toggle', 'modal');
+
+    if (mode === 'add') {
+      button.setAttribute('data-target', '#addEmployeeModal');
+    }
+    if (mode === 'edit') {
+      button.setAttribute('data-target', '#updateEmployeeModal');
+    }
+    if (mode === 'delete') {
+      button.setAttribute('data-target', '#deleteEmployeeModal');
+    }
+
+    container?.appendChild(button);
+    button.click();
+
+  }
+
 }
